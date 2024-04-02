@@ -1,5 +1,4 @@
 pipeline {
-    agent any
     
     parameters {
         booleanParam(defaultValue: false, description: 'Set MY_VALUE to true or false', name: 'MY_VALUE')
