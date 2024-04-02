@@ -6,9 +6,10 @@ pipeline {
     }
     
     stages {
+
         stage('Build') {
             steps {
-                sh "npx install playwright"
+                sh "npm install playwright"
                 // Example build step
                 sh "echo 'Building with MY_VALUE=${params.MY_VALUE}'"
                 
