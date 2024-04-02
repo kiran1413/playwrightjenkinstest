@@ -13,7 +13,7 @@ pipeline {
                 sh "echo 'Building with MY_VALUE=${params.MY_VALUE}'"
                 
                 // Write MY_VALUE to hello.js file
-                writeFile file: 'tests\mytest.spec.js', text: "const MY_VALUE = '${params.MY_VALUE}';\n"
+                writeFile file: 'tests/mytest.spec.js', text: "const MY_VALUE = '${params.MY_VALUE}';\n"
             }
         }
         
