@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    
+    environment {
+        MY_VALUE = 'default_value'
+    }
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Example build step
+                sh "echo 'Building with MY_VALUE=$MY_VALUE'"
+                
+                // Write MY_VALUE to hello.js file
+                writeFile file: '/home/hello.js', text: "const MY_VALUE = '${MY_VALUE}';\n"
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run Playwright test..
+                sh"npx install playwright"
+                sh "npx playwright test mytest.spec.js --project=chromium --headed"
+            }
+        }
+    }
+}
