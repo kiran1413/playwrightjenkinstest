@@ -13,6 +13,10 @@
   },
   "engines": {
   "node": ">=16"
+},
+  "scripts": {
+  "test": "playwright test mytest.spec.js"
 }
+
 
 }
