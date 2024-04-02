@@ -24,7 +24,7 @@ agent any
             }
             steps {
                 // Run Playwright test
-                sh "npm playwright test mytest.spec.js"
+                sh "npm test"
             }
         }
     }
