@@ -1,26 +1,29 @@
 pipeline {
     agent any
     
-    environment {
-        MY_VALUE = 'default_value'
+    parameters {
+        booleanParam(defaultValue: false, description: 'Set MY_VALUE to true or false', name: 'MY_VALUE')
     }
     
     stages {
         stage('Build') {
             steps {
+                sh "npx install playwright"
                 // Example build step
-                sh "echo 'Building with MY_VALUE=$MY_VALUE'"
+                sh "echo 'Building with MY_VALUE=${params.MY_VALUE}'"
                 
                 // Write MY_VALUE to hello.js file
-                writeFile file: '/home/hello.js', text: "const MY_VALUE = '${MY_VALUE}';\n"
+                writeFile file: 'tests\mytest.spec.js', text: "const MY_VALUE = '${params.MY_VALUE}';\n"
             }
         }
         
         stage('Test') {
+            when {
+                expression { params.MY_VALUE == true }
+            }
             steps {
-                // Run Playwright test..
-                sh"npx install playwright"
-                sh "npx playwright test mytest.spec.js --project=chromium --headed"
+                // Run Playwright test
+                sh "npx playwright test mytest.spec.js"
             }
         }
     }
